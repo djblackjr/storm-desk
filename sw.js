@@ -1,4 +1,4 @@
-const CACHE_NAME = 'storm-desk-shell-v1';
+const CACHE_NAME = 'storm-desk-shell-v2';
 const APP_ROOT = self.registration.scope;
 const SHELL = ['', 'style.css', 'app.js', 'site.webmanifest', 'app-icon.svg'].map(path => new URL(path, APP_ROOT).href);
 
