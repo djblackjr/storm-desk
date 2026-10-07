@@ -47,8 +47,8 @@ footer{font-size:12px}
 	.brand{font-size:12px}
 	.brand small{font-size:9px}
 	.connection{font-size:0}
-	.button{padding:9px 10px;font-size:12px}
-	.eyebrow{font-size:10px}
+	.button{padding:9px 10px;font-size:14px}
+	.eyebrow{font-size:11px}
 	.intro h1{font-size:26px}
 	.intro p{font-size:14px}
 	.checked small{font-size:9px}
@@ -56,28 +56,28 @@ footer{font-size:12px}
 	.checked span{font-size:10px}
 	.banner h2{font-size:19px}
 	.banner p{font-size:12px}
-	.metrics label{font-size:9px;line-height:1.4}
+	.metrics label{font-size:11px;line-height:1.4}
 	.metrics strong{font-size:25px}
 	.metrics strong small{font-size:12px}
-	.metrics p{font-size:11px}
+	.metrics p{font-size:12px}
 	.metrics .movement{font-size:13px;line-height:1.4}
 	.panel{padding:15px}
 	.panel-head h3{font-size:16px}
 	.panel-head a{font-size:12px}
 	.hint{font-size:13px;line-height:1.6}
 	#map{height:300px}
-	.legend{font-size:11px;line-height:1.4}
+	.legend{font-size:12px;line-height:1.4}
 	.track-point{min-width:92px}
-	.track-point strong,.track-point span{font-size:11px}
-	.prob-row{grid-template-columns:1.35fr repeat(3,.7fr);font-size:11px;gap:4px;padding:10px 8px}
-	.prob-row.header{font-size:9px}
-	.prob-row .value{font-size:12px}
-	.product strong{font-size:12px}
-	.product small{font-size:10px}
-	.product b{font-size:11px}
-	.empty{font-size:12px;line-height:1.5}
-	.caution p{font-size:12px;line-height:1.6}
-	footer{font-size:11px;line-height:1.5}
-	.mobile-nav a{font-size:11px;padding:3px}
+	.track-point strong,.track-point span{font-size:12px}
+	.prob-row{grid-template-columns:1.35fr repeat(3,.7fr);font-size:13px;gap:4px;padding:10px 8px}
+	.prob-row.header{font-size:11px}
+	.prob-row .value{font-size:13px}
+	.product strong{font-size:13px}
+	.product small{font-size:12px}
+	.product b{font-size:12px}
+	.empty{font-size:13px;line-height:1.5}
+	.caution p{font-size:13px;line-height:1.6}
+	footer{font-size:12px;line-height:1.5}
+	.mobile-nav a{font-size:13px;padding:3px}
 	.mobile-nav b{font-size:20px}
 }
