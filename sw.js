@@ -1,6 +1,6 @@
-const CACHE_NAME = 'storm-desk-shell-v2';
+const CACHE_NAME = 'storm-desk-shell-v3';
 const APP_ROOT = self.registration.scope;
-const SHELL = ['', 'style.css', 'app.js', 'site.webmanifest', 'app-icon.svg'].map(path => new URL(path, APP_ROOT).href);
+const SHELL = ['', 'style.css?v=readable-2', 'app.js', 'site.webmanifest', 'app-icon.svg'].map(path => new URL(path, APP_ROOT).href);
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
