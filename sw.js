@@ -23,7 +23,7 @@ self.addEventListener('fetch', event => {
   const request = event.request;
   const url = new URL(request.url);
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
-  if (url.pathname.endsWith('/dashboard.json')) return;
+  if (/\/(dashboard|layers)\.json$/.test(url.pathname)) return;
   // Network first: the cache is only an offline fallback, so a deploy can never be masked by a stale shell.
   if (request.mode === 'navigate') {
     // Revalidate the page itself; it names the build-stamped script and stylesheet.

@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '*/5 * * * *'
+    # Off-peak minutes: GitHub delays or drops scheduled runs queued at busy times such as :00.
+    - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -36,6 +37,7 @@ jobs:
           STORM_ID: ${{ vars.STORM_ID || 'AL092026' }}
           NHC_BIN: ${{ vars.NHC_BIN || 'AT4' }}
           DASHBOARD_JSON: dist/dashboard.json
+          PREVIOUS_SNAPSHOT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/dashboard.json
         run: |
           mkdir -p dist
           cp index.html style.css app.js site.webmanifest app-icon.svg sw.js dist/
@@ -44,6 +46,18 @@ jobs:
           python build_dashboard.py
       - name: Test public snapshot parsing and privacy shape
         run: python -m unittest -v test_build_dashboard.py
+      - name: Check the published artifact
+        run: |
+          ! grep -l "__BUILD__" dist/index.html dist/sw.js
+          python - <<'EOF'
+          import json
+          from test_build_dashboard import PUBLIC_KEYS
+          snapshot = json.load(open("dist/dashboard.json"))
+          extra = set(snapshot) - PUBLIC_KEYS
+          assert not extra, f"unexpected keys in public snapshot: {extra}"
+          layers = json.load(open("dist/layers.json"))
+          print("snapshot keys ok;", "map layers:", ", ".join(sorted(layers)) or "none")
+          EOF
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact

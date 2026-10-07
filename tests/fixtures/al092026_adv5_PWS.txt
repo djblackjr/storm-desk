@@ -1,0 +1,119 @@
+613 
+FONT14 KNHC 072049
+PWSAT4
+                                                                    
+TROPICAL STORM ISAIAS WIND SPEED PROBABILITIES NUMBER   5           
+NWS NATIONAL HURRICANE CENTER MIAMI FL       AL092026               
+2100 UTC WED OCT 07 2026                                            
+                                                                    
+AT 2100Z THE CENTER OF TROPICAL STORM ISAIAS WAS LOCATED NEAR       
+LATITUDE 22.7 NORTH...LONGITUDE 92.9 WEST WITH MAXIMUM SUSTAINED    
+WINDS NEAR 55 KTS...65 MPH...100 KM/H.                              
+                                                                    
+Z INDICATES COORDINATED UNIVERSAL TIME (GREENWICH)                  
+   ATLANTIC STANDARD TIME (AST)...SUBTRACT 4 HOURS FROM Z TIME      
+   EASTERN  DAYLIGHT TIME (EDT)...SUBTRACT 4 HOURS FROM Z TIME      
+   CENTRAL  DAYLIGHT TIME (CDT)...SUBTRACT 5 HOURS FROM Z TIME      
+                                                                    
+WIND SPEED PROBABILITY TABLE FOR SPECIFIC LOCATIONS                 
+                                                                    
+CHANCES OF SUSTAINED (1-MINUTE AVERAGE) WIND SPEEDS OF AT LEAST     
+   ...34 KT (39 MPH... 63 KM/H)...                                  
+   ...50 KT (58 MPH... 93 KM/H)...                                  
+   ...64 KT (74 MPH...119 KM/H)...                                  
+FOR LOCATIONS AND TIME PERIODS DURING THE NEXT 5 DAYS               
+                                                                    
+PROBABILITIES FOR LOCATIONS ARE GIVEN AS OP(CP) WHERE               
+    OP  IS THE PROBABILITY OF THE EVENT BEGINNING DURING            
+        AN INDIVIDUAL TIME PERIOD (ONSET PROBABILITY)               
+   (CP) IS THE PROBABILITY OF THE EVENT OCCURRING BETWEEN           
+        18Z WED AND THE FORECAST HOUR (CUMULATIVE PROBABILITY)      
+                                                                    
+PROBABILITIES ARE GIVEN IN PERCENT                                  
+X INDICATES PROBABILITIES LESS THAN 1 PERCENT                       
+PROBABILITIES FOR 34 KT AND 50 KT ARE SHOWN AT A GIVEN LOCATION WHEN
+THE 5-DAY CUMULATIVE PROBABILITY IS AT LEAST 3 PERCENT.             
+PROBABILITIES FOR 34...50...64 KT SHOWN WHEN THE 5-DAY              
+64-KT CUMULATIVE PROBABILITY IS AT LEAST 1 PERCENT.                 
+                                                                    
+                                                                    
+  - - - - WIND SPEED PROBABILITIES FOR SELECTED LOCATIONS - - - -   
+                                                                    
+               FROM    FROM    FROM    FROM    FROM    FROM    FROM 
+  TIME       18Z WED 06Z THU 18Z THU 06Z FRI 18Z FRI 18Z SAT 18Z SUN
+PERIODS         TO      TO      TO      TO      TO      TO      TO  
+             06Z THU 18Z THU 06Z FRI 18Z FRI 18Z SAT 18Z SUN 18Z MON
+                                                                    
+FORECAST HOUR    (12)   (24)    (36)    (48)    (72)    (96)   (120)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+LOCATION       KT                                                   
+                                                                    
+TALLAHASSEE FL 34  X   X( X)   X( X)   X( X)   5( 5)   X( 5)   X( 5)
+ 
+ST MARKS FL    34  X   X( X)   X( X)   X( X)   4( 4)   X( 4)   X( 4)
+ 
+APALACHICOLA   34  X   X( X)   X( X)   8( 8)  22(30)   X(30)   X(30)
+APALACHICOLA   50  X   X( X)   X( X)   1( 1)   6( 7)   X( 7)   X( 7)
+APALACHICOLA   64  X   X( X)   X( X)   X( X)   2( 2)   X( 2)   X( 2)
+ 
+GFAM 290N 850W 34  X   X( X)   X( X)  13(13)  14(27)   X(27)   X(27)
+GFAM 290N 850W 50  X   X( X)   X( X)   1( 1)   4( 5)   X( 5)   X( 5)
+GFAM 290N 850W 64  X   X( X)   X( X)   1( 1)   1( 2)   X( 2)   X( 2)
+ 
+PANAMA CITY FL 34  X   X( X)   X( X)  11(11)  39(50)   X(50)   X(50)
+PANAMA CITY FL 50  X   X( X)   X( X)   1( 1)  18(19)   X(19)   X(19)
+PANAMA CITY FL 64  X   X( X)   X( X)   X( X)   7( 7)   X( 7)   X( 7)
+ 
+DESTIN EXEC AP 34  X   X( X)   X( X)   4( 4)  52(56)   X(56)   X(56)
+DESTIN EXEC AP 50  X   X( X)   X( X)   1( 1)  24(25)   X(25)   X(25)
+DESTIN EXEC AP 64  X   X( X)   X( X)   X( X)   8( 8)   X( 8)   X( 8)
+ 
+ALBANY GA      34  X   X( X)   X( X)   X( X)   3( 3)   X( 3)   X( 3)
+ 
+COLUMBUS GA    34  X   X( X)   X( X)   X( X)   8( 8)   X( 8)   X( 8)
+ 
+DOTHAN AL      34  X   X( X)   X( X)   X( X)  21(21)   X(21)   X(21)
+DOTHAN AL      50  X   X( X)   X( X)   X( X)   5( 5)   X( 5)   X( 5)
+ 
+BIRMINGHAM AL  34  X   X( X)   X( X)   X( X)  18(18)   1(19)   X(19)
+ 
+MONTGOMERY AL  34  X   X( X)   X( X)   X( X)  30(30)   X(30)   X(30)
+MONTGOMERY AL  50  X   X( X)   X( X)   X( X)   6( 6)   X( 6)   X( 6)
+ 
+WHITING FLD FL 34  X   X( X)   X( X)   3( 3)  58(61)   X(61)   X(61)
+WHITING FLD FL 50  X   X( X)   X( X)   1( 1)  27(28)   X(28)   X(28)
+WHITING FLD FL 64  X   X( X)   X( X)   X( X)   7( 7)   X( 7)   X( 7)
+ 
+PENSACOLA FL   34  X   X( X)   X( X)   4( 4)  60(64)   X(64)   X(64)
+PENSACOLA FL   50  X   X( X)   X( X)   1( 1)  30(31)   X(31)   X(31)
+PENSACOLA FL   64  X   X( X)   X( X)   X( X)   8( 8)   X( 8)   X( 8)
+ 
+GFAM 290N 870W 34  X   X( X)   X( X)  60(60)  26(86)   X(86)   X(86)
+GFAM 290N 870W 50  X   X( X)   X( X)  28(28)  32(60)   X(60)   X(60)
+GFAM 290N 870W 64  X   X( X)   X( X)  14(14)  27(41)   X(41)   X(41)
+ 
+MOBILE AL      34  X   X( X)   X( X)   2( 2)  39(41)   1(42)   X(42)
+MOBILE AL      50  X   X( X)   X( X)   X( X)  19(19)   X(19)   X(19)
+MOBILE AL      64  X   X( X)   X( X)   X( X)   5( 5)   X( 5)   X( 5)
+ 
+GULFPORT MS    34  X   X( X)   X( X)   2( 2)  20(22)   1(23)   X(23)
+GULFPORT MS    50  X   X( X)   X( X)   X( X)   8( 8)   X( 8)   X( 8)
+GULFPORT MS    64  X   X( X)   X( X)   X( X)   2( 2)   X( 2)   X( 2)
+ 
+STENNIS MS     34  X   X( X)   X( X)   1( 1)  11(12)   X(12)   X(12)
+STENNIS MS     50  X   X( X)   X( X)   X( X)   3( 3)   X( 3)   X( 3)
+ 
+BURAS LA       34  X   X( X)   X( X)   6( 6)   7(13)   X(13)   X(13)
+BURAS LA       50  X   X( X)   X( X)   2( 2)   3( 5)   X( 5)   X( 5)
+BURAS LA       64  X   X( X)   X( X)   X( X)   1( 1)   X( 1)   X( 1)
+ 
+GFAM 280N 890W 34  X   X( X)   3( 3)  46(49)   2(51)   X(51)   X(51)
+GFAM 280N 890W 50  X   X( X)   X( X)  25(25)   2(27)   X(27)   X(27)
+GFAM 280N 890W 64  X   X( X)   X( X)  15(15)   2(17)   X(17)   X(17)
+ 
+JACKSON MS     34  X   X( X)   X( X)   X( X)   3( 3)   X( 3)   X( 3)
+ 
+NEW ORLEANS LA 34  X   X( X)   X( X)   1( 1)   3( 4)   X( 4)   X( 4)
+ 
+$$                                                                  
+FORECASTER BLAKE
