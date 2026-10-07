@@ -74,6 +74,32 @@ def summary_fields(tcp: str) -> dict:
     return summary
 
 
+def parse_watches_and_warnings(tcp: str) -> list[dict]:
+    """Extract NHC's explicitly listed watches/warnings; never infer local orders."""
+    section = re.search(
+        r"SUMMARY OF WATCHES AND WARNINGS IN EFFECT:\s*(.*?)\s*DISCUSSION AND OUTLOOK",
+        tcp,
+        re.S | re.I,
+    )
+    if not section:
+        return []
+
+    alerts = []
+    current = None
+    for line in section.group(1).splitlines():
+        heading = re.match(r"\s*A (.+?) is in effect for\.\.\.\s*$", line, re.I)
+        if heading:
+            current = {"type": heading.group(1).strip(), "areas": []}
+            alerts.append(current)
+        elif current and re.match(r"\s*\*\s+", line):
+            area = re.sub(r"^\s*\*\s+", "", line).strip()
+            if area:
+                current["areas"].append(area)
+        elif line.strip() and not line.lstrip().startswith("*"):
+            current = None
+    return [alert for alert in alerts if alert["areas"]]
+
+
 def coordinate_pair(text: str) -> tuple[float, float] | None:
     match = re.search(r"(\d{1,2}(?:\.\d+)?)([NS])\s+(\d{1,3}(?:\.\d+)?)([EW])", text)
     if not match:
@@ -132,15 +158,31 @@ def pws_cumulative(pws: str, location: str) -> dict[str, int]:
     return probabilities
 
 
-def build_snapshot(storm_id: str, products: dict[str, str], status: str) -> dict:
+def build_snapshot(storm_id: str, nhc_bin: str, products: dict[str, str], status: str) -> dict:
     tcp = products.get("TCP", "")
     summary = summary_fields(tcp)
+    advisory_id = product_id(tcp) if tcp else None
+    graphic_stamp = advisory_id.rsplit(" ", 1)[-1] if advisory_id else ""
+    graphics_path = (
+        f"https://www.nhc.noaa.gov/refresh/graphics_{nhc_bin.lower()}+shtml/{graphic_stamp}.shtml"
+        if graphic_stamp
+        else f"https://www.nhc.noaa.gov/graphics_{nhc_bin.lower()}.shtml"
+    )
     snapshot = {
         "last_check": datetime.now(timezone.utc).isoformat(),
         "fetch_status": status,
         "storm_id": storm_id,
         "storm_name": summary.get("title", storm_id),
         "summary": summary,
+        "alerts": parse_watches_and_warnings(tcp),
+        "sources": {
+            "nhc_home": "https://www.nhc.noaa.gov/",
+            "nhc_advisory": "https://www.nhc.noaa.gov/text/MIATCP" + nhc_bin + ".shtml",
+            "nhc_cone": f"{graphics_path}?wwCone#contents",
+            "nhc_key_messages": f"{graphics_path}?key_messages#contents",
+            "nhc_wind_probabilities": f"{graphics_path}?tswind120#contents",
+            "nhc_arrival_time": f"{graphics_path}?mltoa34#contents",
+        },
         "track": forecast_track_points(products.get("TCM", "")),
         "wind_probabilities": {
             location: pws_cumulative(products.get("PWS", ""), location)
@@ -165,7 +207,7 @@ def main() -> None:
     status = "Connected" if products else "No current NHC products found"
     destination = Path(os.environ.get("DASHBOARD_JSON", "dashboard.json"))
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(json.dumps(build_snapshot(storm_id, products, status), indent=2) + "\n")
+    destination.write_text(json.dumps(build_snapshot(storm_id, nhc_bin, products, status), indent=2) + "\n")
     print(f"Published {len(products)} public NHC products ({status})")
 
 

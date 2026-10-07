@@ -41,6 +41,8 @@ jobs:
           cp index.html style.css app.js site.webmanifest app-icon.svg sw.js dist/
           touch dist/.nojekyll
           python build_dashboard.py
+      - name: Test public snapshot parsing and privacy shape
+        run: python -m unittest -v test_build_dashboard.py
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact

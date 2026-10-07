@@ -91,7 +91,7 @@ function renderTrack(data) {
 }
 
 function renderProbabilities(data) {
-  const container = $('#probabilities');
+  const container = $('#probability-table');
   container.replaceChildren();
   const heading = document.createElement('div');
   heading.className = 'prob-row header';
@@ -151,6 +151,56 @@ function renderProducts(data) {
   }
 }
 
+function renderWatchAlerts(data) {
+  const list = $('#watch-list');
+  list.replaceChildren();
+  const alerts = Array.isArray(data.alerts) ? data.alerts : [];
+  if (!alerts.length) {
+    const empty = document.createElement('div');
+    empty.className = 'empty';
+    empty.textContent = data.products?.some(product => product.code === 'TCP')
+      ? 'No watch/warning entries were parsed from the latest NHC public advisory. Open the official product to verify.'
+      : 'NHC watch/warning information is not available in this snapshot.';
+    list.append(empty);
+    return;
+  }
+  alerts.forEach(alert => {
+    const card = document.createElement('article');
+    card.className = 'watch-item';
+    const heading = document.createElement('strong');
+    heading.textContent = alert.type;
+    const areas = document.createElement('ul');
+    (alert.areas || []).forEach(area => {
+      const item = document.createElement('li');
+      item.textContent = area;
+      areas.append(item);
+    });
+    card.append(heading, areas);
+    list.append(card);
+  });
+}
+
+function renderOfficialLinks(data) {
+  const links = data.sources || {};
+  for (const [selector, key] of [
+    ['#cone-link', 'nhc_cone'],
+    ['#key-messages-link', 'nhc_key_messages'],
+    ['#wind-link', 'nhc_wind_probabilities'],
+    ['#arrival-link', 'nhc_arrival_time'],
+  ]) {
+    if (links[key]) $(selector).href = links[key];
+  }
+  if (links.nhc_advisory) {
+    const advisoryLink = document.createElement('a');
+    advisoryLink.href = links.nhc_advisory;
+    advisoryLink.target = '_blank';
+    advisoryLink.rel = 'noreferrer';
+    advisoryLink.textContent = 'NHC ↗';
+    const tag = $('#watch-panel .tag');
+    tag.replaceChildren(advisoryLink);
+  }
+}
+
 async function notifyNewProducts(products) {
   const ids = (products || []).map(product => product.id).filter(Boolean);
   let known = [];
@@ -185,10 +235,14 @@ function render(data) {
   const online = data.fetch_status === 'Connected';
   connection.classList.toggle('online', online);
   connection.classList.toggle('error', !online);
-  connection.textContent = online ? 'NHC connected' : data.fetch_status || 'Waiting';
+  connection.textContent = online ? 'Snapshot fetched' : data.fetch_status || 'Waiting';
   setText('#checked', formatTime(data.last_check));
   const checkAge = data.last_check ? (Date.now() - new Date(data.last_check).getTime()) / 60000 : Infinity;
-  setText('#stale', checkAge > 15 ? 'Snapshot may be stale — check NHC directly.' : 'Refreshes from NHC about every five minutes');
+  const stale = checkAge > 15;
+  setText('#stale', stale ? 'Snapshot may be stale — verify NHC directly.' : 'Scheduled fetch; GitHub timing can be delayed');
+  $('#stale').classList.toggle('stale', stale);
+  const issued = data.summary?.issued;
+  setText('#advisory-issued', issued ? `Public advisory issued: ${issued}` : 'NHC advisory issue time unavailable; verify the official product.');
   setText('#storm-id', data.storm_id);
   setText('#storm-name', data.storm_name || 'No current system data');
   setText('#headline', data.summary?.headline || 'Public NHC storm information will appear here.');
@@ -203,7 +257,9 @@ function render(data) {
   renderMap(data);
   renderTrack(data);
   renderProbabilities(data);
+  renderWatchAlerts(data);
   renderProducts(data);
+  renderOfficialLinks(data);
   notifyNewProducts(data.products || []).catch(error => console.warn('Notification failed', error));
 }
 
