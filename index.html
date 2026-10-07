@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#091824">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Storm Desk">
+  <title>Storm Desk · NHC Tracker</title>
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="icon" href="./app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./app-icon.svg">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="top" class="shell">
+    <header class="topbar">
+      <a class="brand" href="./"><span class="brand-icon">✳</span><span>STORM<span> DESK</span><small>NHC TRACKER · SOUTH WALTON</small></span></a>
+      <div class="actions"><span id="connection" class="connection">Connecting…</span><button id="alerts" class="button muted">Enable alerts</button><button id="refresh" class="button primary">Refresh ↻</button></div>
+    </header>
+    <main>
+      <section class="intro"><div><div class="eyebrow"><i></i> LOCAL STORM DESK / SOUTH WALTON</div><h1>Storm situation</h1><p>NHC advisories, forecast track and nearby wind probabilities</p></div><div class="checked"><small>LAST NHC CHECK</small><strong id="checked">Waiting for first check</strong><span id="stale">Updates about every five minutes</span></div></section>
+      <section class="banner"><span class="storm-mark">✳</span><div class="storm-copy"><div class="eyebrow">ACTIVE SYSTEM <span id="storm-id">—</span></div><h2 id="storm-name">Waiting for NHC data</h2><p id="headline">Public NHC storm information will appear here.</p></div><span id="position" class="position">Position unavailable</span></section>
+      <section class="metrics">
+        <article><label>MAX SUSTAINED WINDS</label><strong><span id="wind">—</span><small>mph</small></strong><p id="wind-text">NHC reported</p></article>
+        <article><label>CENTRAL PRESSURE</label><strong><span id="pressure">—</span><small>mb</small></strong><p>Minimum central pressure</p></article>
+        <article><label>MOVEMENT</label><strong class="movement" id="movement">—</strong><p>Direction and forward speed</p></article>
+        <article><label>DESTIN TS-WIND PROBABILITY</label><strong><span id="dest-prob">—</span><small>34 kt</small></strong><p>Cumulative NHC wind probability</p></article>
+      </section>
+      <section class="layout">
+        <article class="panel map-panel"><div class="panel-head"><div><div class="eyebrow">FORECAST TRACK</div><h3>Position &amp; projected path</h3></div><a href="https://www.nhc.noaa.gov/" target="_blank" rel="noreferrer">NHC ↗</a></div><div id="map" aria-label="NHC storm forecast track"></div><div class="legend"><span><i class="dot storm-dot"></i> Storm position</span><span><i class="line"></i> Forecast points</span><span id="track-count">Track unavailable</span></div><div id="track" class="track"></div></article>
+        <div class="side">
+          <article class="panel"><div class="panel-head"><div><div class="eyebrow">WIND SPEED PROBABILITIES</div><h3>Nearby locations</h3></div><span class="tag">NHC</span></div><p class="hint">Cumulative chance of sustained threshold winds. These are location probabilities, not storm peak wind.</p><div id="probabilities" class="probabilities"><div class="empty">Waiting for NHC data…</div></div></article>
+          <article class="panel"><div class="panel-head"><div><div class="eyebrow">OFFICIAL PRODUCTS</div><h3>Latest advisories</h3></div></div><div id="products" class="products"><div class="empty">Waiting for products…</div></div></article>
+        </div>
+      </section>
+      <section class="panel caution"><span>ⓘ</span><p>This public app shows public NHC information only. It does not show a property marker, evacuation order status, or household-specific advice. Follow official NHC and Walton County guidance.</p></section>
+      <footer><span>Public NHC products · nearby airport probabilities</span><span>Auto-refresh every minute</span></footer>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="App navigation"><a href="#top"><b>⌂</b>Overview</a><a href="#map"><b>⌖</b>Track</a><a href="#probabilities"><b>◉</b>Wind</a></nav>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="./app.js"></script>
+</body>
+</html>

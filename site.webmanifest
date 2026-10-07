@@ -1,0 +1,15 @@
+{
+  "id": "./",
+  "name": "Storm Desk — NHC Tracker",
+  "short_name": "Storm Desk",
+  "description": "Public NHC storm tracking and nearby wind probabilities for South Walton.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#09151e",
+  "theme_color": "#091824",
+  "icons": [
+    {"src": "./app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}

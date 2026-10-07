@@ -1,0 +1,52 @@
+name: Refresh NHC data and deploy Storm Desk
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install data dependency
+        run: python -m pip install -r requirements.txt
+      - name: Fetch public NHC products
+        env:
+          STORM_ID: ${{ vars.STORM_ID || 'AL092026' }}
+          NHC_BIN: ${{ vars.NHC_BIN || 'AT4' }}
+          DASHBOARD_JSON: dist/dashboard.json
+        run: |
+          mkdir -p dist
+          cp index.html style.css app.js site.webmanifest app-icon.svg sw.js dist/
+          touch dist/.nojekyll
+          python build_dashboard.py
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
