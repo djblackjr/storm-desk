@@ -93,6 +93,10 @@ DISCUSSION AND OUTLOOK
         self.assertEqual(snapshot["alerts"][0]["type"], "Hurricane Watch")
         self.assertTrue(snapshot["sources"]["nhc_cone"].endswith("graphics_at4+shtml/071753.shtml?wwCone#contents"))
         self.assertTrue(snapshot["sources"]["nhc_arrival_time"].endswith("?mltoa34#contents"))
+        self.assertEqual(snapshot["sources"]["images"]["nhc_cone"],
+                         "https://www.nhc.noaa.gov/storm_graphics/AT09/refresh/AL092026_5day_cone+png/071753_5day_cone.png")
+        self.assertEqual(snapshot["sources"]["images"]["nhc_key_messages"],
+                         "https://www.nhc.noaa.gov/storm_graphics/AT09/AL092026_key_messages.png")
         self.assertNotIn("property", snapshot)
         self.assertNotIn("latest_update", snapshot)
         self.assertLessEqual(set(snapshot), PUBLIC_KEYS)

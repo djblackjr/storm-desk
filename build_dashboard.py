@@ -468,6 +468,15 @@ def build_snapshot(storm_id: str, nhc_bin: str, products: dict[str, str], status
         if graphic_stamp
         else f"https://www.nhc.noaa.gov/graphics_{nhc_bin.lower()}.shtml"
     )
+    # NHC serves each graphic as a plain image; the app shows these in its own viewer.
+    images = {}
+    if graphic_stamp and storm_id[:2] in ("AL", "EP", "CP"):
+        folder = f"https://www.nhc.noaa.gov/storm_graphics/{'AT' if storm_id[:2] == 'AL' else storm_id[:2]}{storm_id[2:4]}"
+        for key, name in (("nhc_cone", "5day_cone"), ("nhc_arrival_time", "earliest_reasonable_toa_34"),
+                          ("nhc_peak_surge", "peak_surge")):
+            images[key] = f"{folder}/refresh/{storm_id}_{name}+png/{graphic_stamp}_{name}.png"
+        images["nhc_wind_probabilities"] = f"{folder}/refresh/{storm_id}_wind_probs_34_F120+png/{graphic_stamp}.png"
+        images["nhc_key_messages"] = f"{folder}/{storm_id}_key_messages.png"
     advisory = advisory_timing(tcp, summary.get("issued", ""))
     reference = datetime.fromisoformat(advisory["issued_utc"]) if "issued_utc" in advisory else None
     track = forecast_track_points(products.get("TCM", ""))
@@ -493,6 +502,7 @@ def build_snapshot(storm_id: str, nhc_bin: str, products: dict[str, str], status
             "nhc_wind_probabilities": f"{graphics_path}?tswind120#contents",
             "nhc_arrival_time": f"{graphics_path}?mltoa34#contents",
             "nhc_peak_surge": f"{graphics_path}?peakSurge#contents",
+            "images": images,
         },
         "track": track,
         "wind_probabilities": {

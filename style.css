@@ -226,3 +226,19 @@ footer{font-size:12px}
 	.prob-bar .bar{grid-column:1/-1;grid-row:2}
 	.mobile-nav{grid-template-columns:repeat(4,1fr)}
 }
+
+/* In-app viewer for official pages and graphics. */
+.viewer{position:fixed;z-index:2000;inset:0;display:grid;grid-template-rows:auto 1fr;background:#06121a}
+.viewer[hidden]{display:none}
+.viewer header{display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;border-bottom:1px solid var(--border);background:#0c1c26}
+.viewer header .button{flex:none;min-height:44px;padding:10px 16px;font-size:15px}
+.viewer header strong{flex:1;min-width:0;overflow:hidden;font:600 15px var(--display);text-overflow:ellipsis;white-space:nowrap}
+.viewer header a{flex:none;color:var(--teal);font-size:13px;text-decoration:none}
+.viewer-body{overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom;padding-bottom:env(safe-area-inset-bottom)}
+.viewer-body img{display:block;width:100%;height:auto;background:#fff;cursor:zoom-in}
+.viewer-body img.zoomed{width:900px;max-width:none;cursor:zoom-out}
+.viewer-hint{margin:0;padding:10px 14px;color:var(--muted);font-size:13px}
+.viewer-body iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+body.viewing{overflow:hidden}
+.official-links a span{white-space:nowrap}
+@media(max-width:620px){.viewer header strong{display:none}.viewer header{justify-content:space-between}}

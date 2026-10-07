@@ -678,6 +678,7 @@ function renderOfficialLinks(data) {
     ['#surge-link', 'nhc_peak_surge'],
   ]) {
     if (links[key]) $(selector).href = links[key];
+    if (links.images?.[key]) $(selector).dataset.image = links.images[key];
   }
   if (links.nhc_advisory) {
     const advisoryLink = el('a', '', 'NHC ↗');
@@ -686,6 +687,52 @@ function renderOfficialLinks(data) {
     advisoryLink.rel = 'noreferrer';
     $('#watch-panel .tag').replaceChildren(advisoryLink);
   }
+}
+
+// Official pages open inside the app so there is always an obvious way back.
+function openViewer(link) {
+  const viewer = $('#viewer');
+  const body = $('#viewer-body');
+  const frame = () => {
+    const page = el('iframe');
+    page.src = link.href;
+    page.title = link.textContent.trim();
+    // No allow-top-navigation: an embedded page cannot replace the app.
+    page.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups');
+    page.referrerPolicy = 'no-referrer';
+    body.replaceChildren(page);
+  };
+  if (link.dataset.image) {
+    const image = el('img');
+    image.alt = link.textContent.replace('↗', '').trim();
+    image.addEventListener('error', frame, { once: true });
+    image.addEventListener('click', () => image.classList.toggle('zoomed'));
+    image.src = link.dataset.image;
+    body.replaceChildren(image, el('p', 'viewer-hint', 'Official NHC graphic. Tap the image to enlarge, then drag to pan.'));
+  } else {
+    frame();
+  }
+  setText('#viewer-title', link.dataset.title || link.textContent.replace('↗', '').trim(), 'Official source');
+  $('#viewer-external').href = link.href;
+  viewer.hidden = false;
+  document.body.classList.add('viewing');
+  history.pushState({ viewer: true }, '');
+  $('#viewer-close').focus();
+}
+
+function closeViewer() {
+  if ($('#viewer').hidden) return;
+  $('#viewer').hidden = true;
+  $('#viewer-body').replaceChildren();
+  document.body.classList.remove('viewing');
+}
+
+function embeddable(link) {
+  if (link.dataset.external !== undefined) return false;
+  if (link.dataset.image) return true;
+  try {
+    return /(^|\.)(nhc\.noaa\.gov|weather\.gov)$/.test(new URL(link.href).hostname);
+  } catch { return false; }
 }
 
 async function notifyNewProducts(products) {
@@ -794,6 +841,15 @@ document.querySelectorAll('.chip[data-layer]').forEach(button => button.addEvent
   try { localStorage.setItem('stormDeskLayers', JSON.stringify(layerState)); } catch { /* preference only */ }
   applyLayerState();
 }));
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[target="_blank"]');
+  if (!link || event.metaKey || event.ctrlKey || !embeddable(link)) return;
+  event.preventDefault();
+  openViewer(link);
+});
+$('#viewer-close').addEventListener('click', () => history.back());
+window.addEventListener('popstate', closeViewer);
+document.addEventListener('keydown', event => { if (event.key === 'Escape' && !$('#viewer').hidden) history.back(); });
 $('#timeline').addEventListener('input', event => showTimelineStep(Number(event.target.value)));
 $('#play').addEventListener('click', togglePlay);
 applyLayerState();
