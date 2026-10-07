@@ -3,6 +3,7 @@ let map;
 let markers;
 let line;
 let initialized = false;
+let rendered = false;
 let lastProductIds = [];
 let registrationPromise = Promise.resolve(null);
 
@@ -231,6 +232,7 @@ async function notifyNewProducts(products) {
 }
 
 function render(data) {
+  rendered = true;
   const connection = $('#connection');
   const online = data.fetch_status === 'Connected';
   connection.classList.toggle('online', online);
@@ -274,6 +276,13 @@ async function refresh() {
     $('#connection').classList.add('error');
     $('#connection').textContent = 'Snapshot unavailable';
     setText('#stale', error.message);
+    if (!rendered) {
+      setText('#advisory-issued', 'NHC advisory issue time unavailable; verify the official product.');
+      const empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.textContent = 'NHC watch/warning information is not available in this snapshot.';
+      $('#watch-list').replaceChildren(empty);
+    }
   } finally {
     button.disabled = false;
   }

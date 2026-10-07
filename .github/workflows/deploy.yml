@@ -39,6 +39,7 @@ jobs:
         run: |
           mkdir -p dist
           cp index.html style.css app.js site.webmanifest app-icon.svg sw.js dist/
+          sed -i "s/__BUILD__/${GITHUB_SHA::8}/g" dist/index.html dist/sw.js
           touch dist/.nojekyll
           python build_dashboard.py
       - name: Test public snapshot parsing and privacy shape

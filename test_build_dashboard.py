@@ -2,6 +2,11 @@ import unittest
 
 from build_dashboard import build_snapshot, parse_watches_and_warnings
 
+PUBLIC_KEYS = {
+    "last_check", "fetch_status", "storm_id", "storm_name", "summary", "alerts", "sources",
+    "track", "wind_probabilities", "products", "events", "position",
+}
+
 
 class WatchWarningParsingTests(unittest.TestCase):
     def test_groups_official_watch_areas(self):
@@ -48,6 +53,7 @@ DISCUSSION AND OUTLOOK
         self.assertTrue(snapshot["sources"]["nhc_arrival_time"].endswith("?mltoa34#contents"))
         self.assertNotIn("property", snapshot)
         self.assertNotIn("latest_update", snapshot)
+        self.assertLessEqual(set(snapshot), PUBLIC_KEYS)
 
 
 if __name__ == "__main__":
