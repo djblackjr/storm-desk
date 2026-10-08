@@ -18,6 +18,7 @@ const COAST_ALERTS = {
 };
 const RADII_STYLE = { 34: ['#ffe066', .16], 50: ['#ff9f43', .24], 64: ['#ff4d6d', .32] };
 const MODEL_COLORS = ['#7fd4ff', '#ffa8e2', '#b9f27c', '#ffcf70', '#c9a8ff', '#7ff0d0', '#ff9d8a', '#9db8ff', '#f2e37c', '#8ae6a2', '#e0b0ff', '#ffd1a8'];
+const EVACUATION_TRIGGERS = ['Hurricane Warning', 'Storm Surge Warning', 'Evacuation Immediate'];
 const CLASSIFICATIONS = { HU: 'Hurricane', TS: 'Tropical Storm', TD: 'Tropical Depression', STS: 'Subtropical Storm', SD: 'Subtropical Depression', PTC: 'Potential Tropical Cyclone', PC: 'Post-Tropical Cyclone' };
 const BASINS = { AL: 'Atlantic', EP: 'East Pacific', CP: 'Central Pacific' };
 const SEVERITY_ORDER = ['Extreme', 'Severe', 'Moderate', 'Minor', 'Unknown'];
@@ -647,6 +648,10 @@ async function refreshLocalAlerts(zone) {
     });
     const alerts = [...latest.values()].sort((a, b) => SEVERITY_ORDER.indexOf(a.severity) - SEVERITY_ORDER.indexOf(b.severity));
     localAlertsAt = new Date();
+    // County evacuation orders are not in any NOAA feed, so point at the county whenever NWS warns of a hurricane or surge here.
+    const evacuationTriggers = alerts.filter(alert => EVACUATION_TRIGGERS.includes(alert.event)).map(alert => alert.event);
+    $('#evac-banner').hidden = !evacuationTriggers.length;
+    setText('#evac-reason', `NWS ${evacuationTriggers.join(' and ')} for this zone. This app cannot see county orders — check Walton County Emergency Management for your zone.`);
     list.replaceChildren();
     setText('#local-status', `Checked ${shortTime(localAlertsAt)} · ${alerts.length} active ${alerts.length === 1 ? 'alert' : 'alerts'}`);
     if (!alerts.length) {
