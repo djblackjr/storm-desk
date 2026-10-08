@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Storm Desk — NHC Tracker",
-  "short_name": "Storm Desk",
+  "name": "Isaias Tracker — NHC",
+  "short_name": "Isaias Tracker",
   "description": "Public NHC storm tracking and nearby wind probabilities for South Walton.",
   "start_url": "./",
   "scope": "./",

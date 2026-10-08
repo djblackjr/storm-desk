@@ -356,9 +356,16 @@ function renderHero(data) {
   hero.style.setProperty('--cat', category ? category.color : '#8198a1');
   setText('#cat-code', category ? category.code : '?');
   setText('#cat-label', category ? (category.min >= 74 ? 'CATEGORY' : category.label.toUpperCase()) : 'INTENSITY UNKNOWN');
+  // The app is named after the storm it follows, so the name tracks the configured system.
+  const listed = (data.active_storms || []).find(storm => storm.id === data.storm_id);
+  const name = listed?.name || (data.storm_name || '').replace(/\s+(Intermediate |Special )?Advisory Number.*$/i, '').split(' ').pop();
+  if (name) {
+    setText('#brand-name', name.toUpperCase());
+    document.title = `${name} Tracker · NHC`;
+  }
   setText('#storm-id', data.storm_id);
   setText('#advisory-number', data.advisory?.number ? `ADVISORY ${data.advisory.number}` : 'ADVISORY —');
-  setText('#storm-name', (data.storm_name || '').replace(/\s+Advisory Number.*$/i, '') || 'No current system data');
+  setText('#storm-name', (data.storm_name || '').replace(/\s+(Intermediate |Special )?Advisory Number.*$/i, '') || 'No current system data');
   setText('#headline', data.summary?.headline || 'Public NHC storm information will appear here.');
   const pos = data.position;
   setText('#position', pos ? `⌖ ${Math.abs(pos.lat).toFixed(1)}°${pos.lat < 0 ? 'S' : 'N'}, ${Math.abs(pos.lon).toFixed(1)}°${pos.lon < 0 ? 'W' : 'E'}` : null, 'Position unavailable');

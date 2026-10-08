@@ -242,3 +242,16 @@ footer{font-size:12px}
 body.viewing{overflow:hidden}
 .official-links a span{white-space:nowrap}
 @media(max-width:620px){.viewer header strong{display:none}.viewer header{justify-content:space-between}}
+
+/* App name in the header. */
+.brand{font-size:26px;letter-spacing:.04em;line-height:1.05}
+.brand b{font-weight:800}
+.brand small{margin-top:5px}
+.brand-icon{width:44px;height:44px;font-size:26px}
+@media(max-width:620px){
+	.topbar{padding:calc(10px + env(safe-area-inset-top)) 0 10px}
+	.brand{flex:none;font-size:19px;letter-spacing:.02em;white-space:nowrap}
+	.brand small{font-size:8px;letter-spacing:.08em}
+	.brand-icon{width:36px;height:36px;font-size:21px}
+	.actions .button{padding:7px 8px;font-size:12px;line-height:1.2}
+}

@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#091824">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Storm Desk">
-  <title>Storm Desk · NHC Tracker</title>
+  <meta name="apple-mobile-web-app-title" content="Isaias Tracker">
+  <title>Isaias Tracker · NHC</title>
   <link rel="manifest" href="./site.webmanifest">
   <link rel="icon" href="./app-icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./app-icon.svg">
@@ -17,11 +17,11 @@
 <body>
   <div id="top" class="shell">
     <header class="topbar">
-      <a class="brand" href="./"><span class="brand-icon">✳</span><span>STORM<span> DESK</span><small>NHC TRACKER · SOUTH WALTON</small></span></a>
-      <div class="actions"><span id="connection" class="connection">Loading snapshot…</span><button id="alerts" class="button muted">Enable alerts</button><button id="refresh" class="button primary">Refresh snapshot ↻</button></div>
+      <a class="brand" href="./"><span class="brand-icon">✳</span><span><b id="brand-name">ISAIAS</b><span> TRACKER</span><small>OFFICIAL NHC DATA · SOUTH WALTON</small></span></a>
+      <div class="actions"><span id="connection" class="connection">Loading snapshot…</span><button id="alerts" class="button muted">Enable alerts</button><button id="refresh" class="button primary">Refresh ↻</button></div>
     </header>
     <main>
-      <section class="intro"><div><div class="eyebrow"><i></i> PUBLIC NHC STORM DESK / SOUTH WALTON AREA</div><h1>Storm situation</h1><p>Official NHC forecast, live imagery, local alerts and water levels</p></div><div class="checked"><small>SNAPSHOT GENERATED</small><strong id="checked">Waiting for first check</strong><span id="stale">Refreshes on the GitHub Actions schedule</span></div></section>
+      <section class="intro"><div><div class="eyebrow"><i></i> PUBLIC NHC TRACKER / SOUTH WALTON AREA</div><h1>Storm situation</h1><p>Official NHC forecast, live imagery, local alerts and water levels</p></div><div class="checked"><small>SNAPSHOT GENERATED</small><strong id="checked">Waiting for first check</strong><span id="stale">Refreshes on the GitHub Actions schedule</span></div></section>
       <section id="hero" class="hero" data-cat="unknown">
         <div class="hero-main">
           <div id="category" class="cat-badge" aria-label="Storm intensity"><span id="cat-code">—</span><small id="cat-label">INTENSITY</small></div>
@@ -69,13 +69,13 @@
         <article class="panel"><div class="panel-head"><div><div class="eyebrow">OFFICIAL PRODUCTS</div><h3>Latest advisories</h3></div></div><div id="products" class="products"><div class="empty">Waiting for products…</div></div></article>
       </section>
       <section class="panel links-panel"><div class="panel-head"><div><div class="eyebrow">OFFICIAL NHC GRAPHICS</div><h3>Risk maps &amp; key messages</h3></div></div><div class="official-links"><a id="cone-link" href="https://www.nhc.noaa.gov/" target="_blank" rel="noreferrer">Warnings &amp; forecast cone <span>↗</span></a><a id="wind-link" href="https://www.nhc.noaa.gov/" target="_blank" rel="noreferrer">Wind probabilities (120 h) <span>↗</span></a><a id="arrival-link" href="https://www.nhc.noaa.gov/" target="_blank" rel="noreferrer">Earliest reasonable TS-wind arrival <span>↗</span></a><a href="https://www.weather.gov/srh/tropical?office=tlh" target="_blank" rel="noreferrer">NWS Tallahassee local products <span>↗</span></a></div><p class="disclaimer">The official cone shows uncertainty in the storm center track, not the extent of hazards. Winds and rain can occur outside the cone.</p></section>
-      <section class="panel preparedness-panel"><div class="panel-head"><div><div class="eyebrow">PREPAREDNESS RESOURCES</div><h3>Plan with official agencies</h3></div></div><div class="official-links"><a href="https://www.ready.gov/hurricanes" target="_blank" rel="noreferrer">Ready.gov hurricane plan <span>opens browser ↗</span></a><a href="https://www.fema.gov/about/news-multimedia/mobile-products" target="_blank" rel="noreferrer">FEMA app: alerts &amp; shelters <span>opens browser ↗</span></a><a href="https://www.mywaltonfl.gov/" target="_blank" rel="noreferrer">Walton County official updates <span>opens browser ↗</span></a></div><p class="disclaimer">These three sites do not allow in-app viewing, so they open in your browser; on iPhone, tap “‹ Storm Desk” at the top-left of the screen to come back. The public app does not determine evacuation status. Follow Walton County emergency management and official orders.</p></section>
+      <section class="panel preparedness-panel"><div class="panel-head"><div><div class="eyebrow">PREPAREDNESS RESOURCES</div><h3>Plan with official agencies</h3></div></div><div class="official-links"><a href="https://www.ready.gov/hurricanes" target="_blank" rel="noreferrer">Ready.gov hurricane plan <span>opens browser ↗</span></a><a href="https://www.fema.gov/about/news-multimedia/mobile-products" target="_blank" rel="noreferrer">FEMA app: alerts &amp; shelters <span>opens browser ↗</span></a><a href="https://www.mywaltonfl.gov/" target="_blank" rel="noreferrer">Walton County official updates <span>opens browser ↗</span></a></div><p class="disclaimer">These three sites do not allow in-app viewing, so they open in your browser; on iPhone, tap the small “‹” app link at the top-left of the screen to come back. The public app does not determine evacuation status. Follow Walton County emergency management and official orders.</p></section>
       <section class="panel caution"><span>ⓘ</span><p>This public app shows public NHC information only. It does not show a property marker, evacuation order status, or household-specific advice. Follow official NHC and Walton County guidance.</p></section>
       <footer><span>Public NHC, NWS and NOAA data · basemap Esri, © OpenStreetMap contributors</span><span>Data refreshes when GitHub Actions runs; schedules can be delayed.</span></footer>
     </main>
   </div>
   <div id="viewer" class="viewer" role="dialog" aria-modal="true" aria-labelledby="viewer-title" hidden>
-    <header><button id="viewer-close" class="button primary">‹ Back to Storm Desk</button><strong id="viewer-title"></strong><a id="viewer-external" target="_blank" rel="noreferrer" data-external>Open in browser ↗</a></header>
+    <header><button id="viewer-close" class="button primary">‹ Back to tracker</button><strong id="viewer-title"></strong><a id="viewer-external" target="_blank" rel="noreferrer" data-external>Open in browser ↗</a></header>
     <div id="viewer-body" class="viewer-body"></div>
   </div>
   <nav class="mobile-nav" aria-label="App navigation"><a href="#top"><b>⌂</b>Overview</a><a href="#map-panel"><b>⌖</b>Map</a><a href="#watch-panel"><b>⚠</b>Alerts</a><a href="#conditions"><b>≈</b>Water</a></nav>
