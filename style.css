@@ -254,4 +254,5 @@ body.viewing{overflow:hidden}
 	.brand small{font-size:8px;letter-spacing:.08em}
 	.brand-icon{width:36px;height:36px;font-size:21px}
 	.actions .button{padding:7px 8px;font-size:12px;line-height:1.2}
+	#refresh{white-space:nowrap}
 }
