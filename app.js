@@ -364,7 +364,10 @@ function renderHero(data) {
     document.title = `${name} Tracker · NHC`;
   }
   setText('#storm-id', data.storm_id);
-  setText('#advisory-number', data.advisory?.number ? `ADVISORY ${data.advisory.number}` : 'ADVISORY —');
+  // A Tropical Cyclone Update between advisories supersedes the advisory's numbers; say when it was issued.
+  const update = (data.summary?.update?.issued || '').match(/^(\d{1,2})(\d{2}) (AM|PM) ([A-Z]{3})/);
+  setText('#advisory-number', (data.advisory?.number ? `ADVISORY ${data.advisory.number}` : 'ADVISORY —')
+    + (update ? ` · UPDATED ${update[1]}:${update[2]} ${update[3]} ${update[4]}` : ''));
   setText('#storm-name', (data.storm_name || '').replace(/\s+(Intermediate |Special )?Advisory Number.*$/i, '') || 'No current system data');
   setText('#headline', data.summary?.headline || 'Public NHC storm information will appear here.');
   const pos = data.position;

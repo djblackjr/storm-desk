@@ -1,0 +1,27 @@
+000
+WTNT64 KNHC 080328
+TCUAT4
+ 
+Hurricane Isaias Tropical Cyclone Update
+NWS National Hurricane Center Miami FL       AL092026
+1030 PM CDT Wed Oct 07 2026
+
+...ISAIAS BECOMES A HURRICANE...
+
+Dropsonde data from an Air Force Reserve hurricane hunter aircraft 
+indicates that Isaias has become a hurricane, with maximum sustained 
+winds of 75 mph (120 km/h) with higher gusts. The minimum central 
+pressure measured from another dropsonde launched in the eye was  
+982 mb (29.00 inches). 
+ 
+SUMMARY OF 1030 PM CDT...0330 UTC...INFORMATION
+---------------------------------------------------
+LOCATION...22.9N 91.9W
+ABOUT 180 MI...290 KM NW OF PROGRESO MEXICO
+ABOUT 460 MI...745 KM SSW OF THE MOUTH OF THE MISSISSIPPI RIVER
+MAXIMUM SUSTAINED WINDS...75 MPH...120 KM/H
+PRESENT MOVEMENT...ENE OR 70 DEGREES AT 9 MPH...15 KM/H
+MINIMUM CENTRAL PRESSURE...982 MB...29.00 INCHES
+ 
+$$
+Forecaster Papin/Roberts

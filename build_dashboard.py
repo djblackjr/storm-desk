@@ -158,6 +158,25 @@ def issued_utc(issued: str) -> datetime | None:
     return parse_clock(match.group(1), match.group(2), match.group(3), day)
 
 
+def apply_update(summary: dict, tcu: str) -> dict:
+    """Fold in a Tropical Cyclone Update, which NHC issues between advisories when a storm changes quickly."""
+    update = summary_fields(tcu)
+    update_at, advisory_at = issued_utc(update.get("issued", "")), issued_utc(summary.get("issued", ""))
+    if not update_at or not advisory_at or update_at <= advisory_at:
+        return summary
+    merged = dict(summary)
+    for key in ("headline", "location", "winds", "movement", "pressure"):
+        if key in update:
+            merged[key] = update[key]
+    # The update carries the storm's current classification; the advisory title keeps its number.
+    name = re.sub(r"\s+Tropical Cyclone Update.*$", "", update.get("title", ""))
+    number = re.search(r"(?:Intermediate |Special )?Advisory Number.*$", summary.get("title", ""))
+    if name and number:
+        merged["title"] = f"{name} {number.group(0)}"
+    merged["update"] = {"issued": update["issued"], "issued_utc": update_at.isoformat()}
+    return merged
+
+
 def advisory_timing(tcp: str, issued: str) -> dict:
     """Issue time in UTC plus NHC's own statement of when the next advisory is due."""
     timing = {}
@@ -483,6 +502,7 @@ def build_snapshot(storm_id: str, nhc_bin: str, products: dict[str, str], status
     for point in track:
         point["time_iso"] = track_time_iso(point["time_utc"], reference)
     alerts = parse_watches_and_warnings(tcp)
+    summary = apply_update(summary, products.get("TCU", ""))
     snapshot = {
         "last_check": datetime.now(timezone.utc).isoformat(),
         "fetch_status": status,

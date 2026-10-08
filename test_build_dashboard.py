@@ -149,6 +149,23 @@ class RealAdvisoryTests(unittest.TestCase):
         reference = datetime(2026, 10, 30, 21, tzinfo=timezone.utc)
         self.assertEqual(track_time_iso("02/0600Z", reference), "2026-11-02T06:00:00+00:00")
 
+    def test_newer_tropical_cyclone_update_supersedes_advisory_numbers(self):
+        update = (FIXTURES / "al092026_adv6_TCU.txt").read_text()
+        snapshot = build_snapshot("AL092026", "AT4", {**self.products, "TCU": update}, "Connected")
+        self.assertEqual(snapshot["storm_name"], "Hurricane Isaias Advisory Number 5")
+        self.assertEqual(snapshot["summary"]["winds"], "75 MPH")
+        self.assertEqual(snapshot["summary"]["pressure"], "982 MB")
+        self.assertEqual(snapshot["summary"]["headline"], "ISAIAS BECOMES A HURRICANE")
+        self.assertEqual(snapshot["summary"]["update"]["issued_utc"], "2026-10-08T03:30:00+00:00")
+        self.assertEqual(snapshot["summary"]["issued"], self.snapshot["summary"]["issued"])
+        self.assertEqual(snapshot["position"], {"lat": 22.9, "lon": -91.9})
+
+    def test_update_older_than_the_advisory_is_ignored(self):
+        update = (FIXTURES / "al092026_adv6_TCU.txt").read_text().replace("Oct 07 2026", "Oct 06 2026")
+        snapshot = build_snapshot("AL092026", "AT4", {**self.products, "TCU": update}, "Connected")
+        self.assertEqual(snapshot["summary"], self.snapshot["summary"])
+        self.assertEqual(snapshot["storm_name"], self.snapshot["storm_name"])
+
     def test_snapshot_stays_within_public_allowlist_and_is_serializable(self):
         self.assertLessEqual(set(self.snapshot), PUBLIC_KEYS)
         text = json.dumps(self.snapshot).lower()
